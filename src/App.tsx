@@ -186,7 +186,7 @@ export default function App() {
           </button>
         </header>
         <main className="container mx-auto p-2">
-          {process.env.REACT_APP_ALCHEMY_API_URL}
+          Welcome welcome welcome 👋🏻! Please connect your wallet to get started.
         </main>
       </div>
     );
