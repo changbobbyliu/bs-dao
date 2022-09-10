@@ -1,0 +1,35 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  REACT_APP_POLKADAO_CONTRACT_ADDRESS: ${{ secrets.REACT_APP_POLKADAO_CONTRACT_ADDRESS }}
+  REACT_APP_PKD_ADDRESS: ${{ secrets.REACT_APP_PKD_ADDRESS }}
+  REACT_APP_GOV_ADDRESS: ${{ secrets.REACT_APP_GOV_ADDRESS }}
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup yarn
+        uses: mskelton/setup-yarn@v1
+        with:
+         node-version: '16.x'
+      - name: Install and Build
+        run: |
+          yarn install
+          yarn build
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build
